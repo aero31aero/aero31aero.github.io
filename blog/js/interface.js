@@ -32,7 +32,7 @@ var interface = function(){
 
 	var activatePostTitleInList = function(post){
 		if(state.currentpost){
-			var oldli = document.getElementById(state.currentpost.title);
+			var oldli = document.getElementById(state.currentpost.path);
 			oldli.classList.remove("active-title");
 		}
 		var newli = document.getElementById(post.path);
