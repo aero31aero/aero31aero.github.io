@@ -1,16 +1,45 @@
 var interface = function(){
-	var addPostTitle = function(post){
+	var state = {};
+	
+	var init = function(){
+		state.currentpost=false;
+		var languageOverrides = {
+		    js: 'javascript',
+		    html: 'xml'
+		};
+		state.markdownparser = markdownit({
+	        html: true,
+	        highlight: function(code, lang) {
+	            if (languageOverrides[lang]) lang = languageOverrides[lang];
+	            if (lang && hljs.getLanguage(lang)) {
+	                try {
+	                    return hljs.highlight(lang, code).value;
+	                } catch (e) {}
+	            }
+	            return '';
+	        }
+	    })
+	    .use(markdownitFootnote);
+	}
+
+	var addPostTitleInList = function(post){
 		var li = document.createElement("li");
 		var list = document.getElementById("post-title-list");
 		li.innerHTML = post.title;
-		li.setAttribute("path",post.path);
-		li.setAttribute("id",post.id);
+		li.setAttribute("id",post.path);
 		list.appendChild(li);
 	}
-	var activatePostTitle = function(post){
-		var li = document.getElementById(post.id);
-		li.classList.add("active-title");
+
+	var activatePostTitleInList = function(post){
+		if(state.currentpost){
+			var oldli = document.getElementById(state.currentpost.title);
+			oldli.classList.remove("active-title");
+		}
+		var newli = document.getElementById(post.path);
+		newli.classList.add("active-title");
+		state.currentpost=post
 	}
+
 	var updatePostTitleInHeader = function(post){
 		var date = {};
 		date.year = post.date.split("-")[2];
@@ -24,9 +53,18 @@ var interface = function(){
 		var titleholder = document.getElementById("post-title");
 		titleholder.innerHTML = title;
 	}
+
+	var renderPost = function(post,rawpost){
+		var articlebody = document.getElementById("article-body");
+		articlebody.innerHTML = state.markdownparser.render(rawpost);
+	};
+
+	init();
+	
 	return {
-		addPostTitle: addPostTitle,
-		activatePostTitle: activatePostTitle,
+		addPostTitleInList: addPostTitleInList,
+		activatePostTitleInList: activatePostTitleInList,
 		updatePostTitleInHeader: updatePostTitleInHeader,
+		renderPost: renderPost,
 	};
 }();

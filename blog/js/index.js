@@ -1,19 +1,25 @@
 var main = function(){
-	var post1 = {
-		id: "title-1",
-		title: "How I Wrote My Blog",
-		path: "how-i-wrote-my-blog",
-		date: "27-10-2016",
-	}
-	var post2 = {
-		id: "title-2",
-		title: "Working For Zulip",
-		path: "working-for-zulip",
-	}
-	interface.addPostTitle(post1);
-	interface.addPostTitle(post2);
-	interface.activatePostTitle(post2);
-	interface.updatePostTitleInHeader(post1);
+	loader.init("/src/blog");
+	loader.getPostsJson(function(err,posts){
+		if(err){
+			return console.log("Error thrown by loader.getPostsJson.");
+		}
+		posts.forEach(function(post){
+			interface.addPostTitleInList(post);
+		})
+		interface.activatePostTitleInList(posts[0]);
+		interface.updatePostTitleInHeader(posts[0]);
+		loader.getPost(posts[0],function(err,rawpost){
+			if(err){
+				return console.log("Error thrown by loader.getPost.");
+			}
+			interface.renderPost(posts[0],rawpost);
+		})
+	});
+	// interface.addPostTitleInList(post1);
+	// interface.addPostTitleInList(post2);
+	// interface.activatePostTitleInList(post2);
+	// interface.updatePostTitleInHeader(post1);
 }
 
 main();
