@@ -12,8 +12,17 @@ var events = function(){
 			li.addEventListener("click",callback);
 		})
 	}
+
+	var setSearchBoxKeyEventHandler = function(callback){
+		var searchbox = document.getElementById("search-box");
+		var sugarcallback = function(){
+			callback(searchbox.value);
+		};
+		searchbox.addEventListener("input",sugarcallback);
+	}
 	return {
-		init: init,
-		setPostTitleClickEventHandler: setPostTitleClickEventHandler,
+		init,
+		setPostTitleClickEventHandler,
+		setSearchBoxKeyEventHandler,
 	};
 }();

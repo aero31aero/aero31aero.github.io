@@ -30,14 +30,26 @@ var interface = function(){
 		list.appendChild(li);
 	}
 
+	var removePostTitlesInList = function(){
+		var list = document.getElementById("post-title-list");
+		list.innerHTML = "";
+	}
+
 	var activatePostTitleInList = function(post){
+		if(!post){
+			post = state.currentpost;
+		}
 		if(state.currentpost){
 			var oldli = document.getElementById(state.currentpost.path);
-			oldli.classList.remove("active-title");
+			if(oldli){
+				oldli.classList.remove("active-title");
+			}
 		}
 		var newli = document.getElementById(post.path);
-		newli.classList.add("active-title");
-		state.currentpost=post
+		if(newli){
+			newli.classList.add("active-title");
+			state.currentpost=post;
+		}
 	}
 
 	var updatePostTitleInHeader = function(post){
@@ -62,9 +74,10 @@ var interface = function(){
 	init();
 	
 	return {
-		addPostTitleInList: addPostTitleInList,
-		activatePostTitleInList: activatePostTitleInList,
-		updatePostTitleInHeader: updatePostTitleInHeader,
-		renderPost: renderPost,
+		addPostTitleInList,
+		removePostTitlesInList,
+		activatePostTitleInList,
+		updatePostTitleInHeader,
+		renderPost,
 	};
 }();

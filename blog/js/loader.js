@@ -8,7 +8,7 @@ var loader = function(){
 		state.blogpath = blogpath;
 	};
 
-	var getPostsJson = function(callback) {
+	var loadPostsJson = function(callback) {
 		var setPostsJson = function () {
   			state.posts = JSON.parse(this.responseText);
   			if(state.posts == false){
@@ -23,7 +23,11 @@ var loader = function(){
 		req.send();
 	};
 
-	var getPost = function(post, callback) {
+	var getPostsJson = function(){
+		return state.posts;
+	}
+
+	var loadPost = function(post, callback) {
 		var setPostsJson = function () {
   			var rawpost = this.responseText;
   			if(rawpost == false){
@@ -38,8 +42,9 @@ var loader = function(){
 	};
 
 	return {
-		init: init,
-		getPostsJson: getPostsJson,
-		getPost: getPost,
+		init,
+		getPostsJson,
+		loadPostsJson,
+		loadPost,
 	};
 }();
