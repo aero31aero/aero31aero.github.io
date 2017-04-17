@@ -12,8 +12,8 @@ var main = function(){
 		})
 	};
 
-	var begin = function(){
-		loader.init("/src/blog");
+	var begin = function(blogpath){
+		loader.init(blogpath);
 		loader.getPostsJson(function(err,posts){
 			if(err){
 				return console.log("Error thrown by loader.getPostsJson.");
@@ -36,4 +36,5 @@ var main = function(){
 	return begin;
 }();
 
-main();
+// here goes nothing...
+main("/src/blog");
