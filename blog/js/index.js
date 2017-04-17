@@ -35,6 +35,15 @@ var main = function(){
 		});
 	}
 
+	var doInitialLoad = function(){
+		interface.init();
+		state.posts.forEach(function(post){
+				interface.addPostTitleInList(post);
+			});
+		loadPost(state.posts[0]);
+		refreshEventListners();
+	}
+
 	var begin = function(blogpath){
 		loader.init(blogpath);
 		loader.loadPostsJson(function(err,posts){
@@ -42,11 +51,7 @@ var main = function(){
 				return console.log("Error thrown by loader.getPostsJson.");
 			}
 			state.posts = posts;
-			posts.forEach(function(post){
-				interface.addPostTitleInList(post);
-			});
-			loadPost(posts[0]);
-			refreshEventListners();
+			doInitialLoad();
 			implementSearch();
 		});
 	};

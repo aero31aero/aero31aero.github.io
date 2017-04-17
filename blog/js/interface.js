@@ -20,6 +20,7 @@ var interface = function(){
 	        }
 	    })
 	    .use(markdownitFootnote);
+	    document.getElementById("search-box").value="";
 	}
 
 	var addPostTitleInList = function(post){
@@ -38,6 +39,9 @@ var interface = function(){
 	var activatePostTitleInList = function(post){
 		if(!post){
 			post = state.currentpost;
+			if(!post){
+				return;
+			}
 		}
 		if(state.currentpost){
 			var oldli = document.getElementById(state.currentpost.path);
@@ -70,10 +74,9 @@ var interface = function(){
 		var articlebody = document.getElementById("article-body");
 		articlebody.innerHTML = state.markdownparser.render(rawpost);
 	};
-
-	init();
 	
 	return {
+		init,
 		addPostTitleInList,
 		removePostTitlesInList,
 		activatePostTitleInList,

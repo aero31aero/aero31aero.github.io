@@ -144,6 +144,7 @@ body {
     align-items: center;
     display: flex;
     flex-shrink: 0;
+    cursor:pointer;
 }
 
 #post-title-list li:first-of-type {
