@@ -1,4 +1,4 @@
-<title>Raia</title><link rel=stylesheet href=css/main.min.css><meta name=viewport content="width=device-width,initial-scale=1"><div id=loading-animation-container><div id=loading-content></div><style>#loading-animation-container {
+<title>Raia</title><link rel=stylesheet href=css/main.min.css><link id=favicon rel="shortcut icon" type=image/png href=""><meta charset=utf-8><meta name=fragment content=!><meta name=viewport content="width=device-width,initial-scale=1"><meta property=og:title content="<raia:title>"><meta property=og:description content="<raia:description"><meta property=og:type content=article><meta property=og:image content="<raia:image>"><meta property=og:url content="<raia:url>"><div id=loading-animation-container><div id=loading-content></div><style>#loading-animation-container {
           position: fixed;
           width: 100%;
           height: 100%;
@@ -6,20 +6,6 @@
           top: 0;
           background: #2b9;
           z-index: 10;
-        }
-
-        #loading-text {
-          display: block;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          color: #fff;
-          width: 100px;
-          height: 30px;
-          margin: -10px 0 0 -45px;
-          text-align: center;
-          font-family: 'PT Sans Narrow', sans-serif;
-          font-size: 20px;
         }
 
         #loading-content {
@@ -30,30 +16,6 @@
           width: 150px;
           height: 150px;
           margin: -75px 0 0 -75px;
-          border: 3px solid #F00;
-        }
-
-        #loading-content:after {
-          content: "";
-          position: absolute;
-          border: 3px solid #0F0;
-          left: 15px;
-          right: 15px;
-          top: 15px;
-          bottom: 15px;
-        }
-
-        #loading-content:before {
-          content: "";
-          position: absolute;
-          border: 3px solid #00F;
-          left: 5px;
-          right: 5px;
-          top: 5px;
-          bottom: 5px;
-        }
-
-        #loading-content {
           border: 3px solid transparent;
           border-top-color: #fff;
           border-bottom-color: #fff;
@@ -61,15 +23,13 @@
           animation: loader 2s linear infinite;
         }
 
-        #loading-content:before {
-          border: 3px solid transparent;
-          border-top-color: #fff;
-          border-bottom-color: #fff;
-          border-radius: 50%;
-          animation: loader 3s linear infinite;
-        }
-
         #loading-content:after {
+          content: "";
+          position: absolute;
+          left: 15px;
+          right: 15px;
+          top: 15px;
+          bottom: 15px;
           border: 3px solid transparent;
           border-top-color: #fff;
           border-bottom-color: #fff;
@@ -77,7 +37,21 @@
           animation: loader 1.5s linear infinite;
         }
 
-        @-webkit-keyframes loaders {
+        #loading-content:before {
+          content: "";
+          position: absolute;
+          left: 5px;
+          right: 5px;
+          top: 5px;
+          bottom: 5px;
+          border: 3px solid transparent;
+          border-top-color: #fff;
+          border-bottom-color: #fff;
+          border-radius: 50%;
+          animation: loader 3s linear infinite;
+        }
+
+        @-webkit-keyframes loader {
           0% {
             transform: rotate(0deg);
           }
